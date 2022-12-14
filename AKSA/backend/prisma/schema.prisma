@@ -1,0 +1,76 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Roles{
+  ADMIN
+  USER
+}
+
+
+model users{
+  userId Int @id @default(autoincrement())
+  userFname String
+  userLname String
+  userPhone String
+  userLocation String
+  useraddress String
+  userEmail  String @unique 
+  Userpassword String
+  isAdmin Boolean @default(false)
+  role Roles @default(USER)
+  cert certificate[] 
+  prodcut  product_Teacher[]
+  messages messages[]
+}
+
+// teacher
+model certificate {
+  teachid Int @id @default(autoincrement()) 
+  teacher_subject String
+  teacheradress String 
+  teacherLevel String
+  teacherImage String
+  UserID Int
+  isvery Boolean @default(false)
+  certif users @relation(fields: [UserID], references : [userId])
+  messages messages[]
+}
+
+
+model product_Teacher {
+  T_id Int @id @default(autoincrement())
+  UserId Int
+  teacherFname String
+  teacherLname String
+  teacherPhone String
+  teacherLocation String
+  teacherLevel String
+  user users @relation(fields: [UserId], references: [userId])
+}
+
+model messages{
+mesId Int @id @default(autoincrement())
+userID Int
+teacherId Int
+iseccapt Boolean @default(false)
+user users @relation(fields: [userID], references: [userId])
+certificate certificate @relation(fields: [teacherId], references: [teachid])
+}
+
+
+
+
+
+
+
+
+
