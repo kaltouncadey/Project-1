@@ -4,7 +4,7 @@ const router = express.Router();
 const messageRouter = require("../Controls_User/messages");
 
 
-router.get("/get", messageRouter.getalldata);
+router.get("/:userID", messageRouter.getoneteach);
 
 
 

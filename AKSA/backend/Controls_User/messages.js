@@ -1,24 +1,37 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
-const getalldata = async (req, res) => {
+const getoneteach = async (req, res) => {
   try {
-    const userss = await prisma.certificate.findMany({
+    const { userID } = req.params;
+
+    const user = await prisma.messages.findByIdAndUpdate({
+      where: {
+        userId: +userID,
+      },
+
       include: {
-        certif: true,
-        users : true,
+        user: true,
       },
     });
-
+    if (!user) {
+      res.json({
+        status: "Error",
+        message: "The user you are looking for is not in the database",
+      });
+    } else {
+      res.json({
+        status: "success",
+        user,
+      });
+    }
+  } catch (error) {
     res.json({
-      userss,
+      error,
     });
-  } catch (errors) {
-    res.json({ errors });
   }
 };
 
-
 module.exports ={
-    getalldata,
+    getoneteach,
 }
