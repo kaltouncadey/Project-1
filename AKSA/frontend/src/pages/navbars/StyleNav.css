@@ -2,22 +2,26 @@
     width: 100%;
     position: fixed;
     z-index: 1;
+    
 }
 .header{
+
     display: flex;
+    align-items: center;
     justify-content: space-between;
     gap: 2rem;
     background: rgba(255, 255, 255, 0.59);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(2.7px);
     -webkit-backdrop-filter: blur(2.7px);
+    
 }
 
  .menu{
     display: flex;
-    align-items: center;
+   text-align: center;
+   align-items: center;
     justify-content: space-between;
-
 }
 
 .menu li:hover{
@@ -50,11 +54,13 @@ color: #9A18CB;
  
 }
 .register{
-    border: 2px solid black;
+    border: 1.5px solid black;
+    padding: .2rem 0;
 }
 
 .btn{
     display: flex;
+    align-items: center;
     gap: 1rem;
 }
 .menus{

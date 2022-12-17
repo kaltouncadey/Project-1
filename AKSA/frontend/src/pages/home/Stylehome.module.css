@@ -34,19 +34,18 @@ button:hover{
 .images{
  margin-top: 6rem;
 }
-.contact .images img{
-    position: relative;
+.images img{
     width: 500px;
     height: 400px;
     animation: kac 10s infinite;
-    position: relative;
+    margin-top: 1rem;
 }
 .cir{
     position: absolute;
     margin-top: 2rem;
     right: 0rem;
     width: 500px;
-    height: 350px;
+    height: 400px;
     background: rgba(255, 255, 255, 0.77);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(5.6px);
@@ -101,7 +100,7 @@ button:hover{
         transform: translateY(0px);
     }
     50%{
-        transform: translateY(-20px);
+        transform: translateY(-10px);
     }
     0%{
         transform: translateY(-0px);

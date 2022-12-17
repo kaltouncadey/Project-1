@@ -26,22 +26,21 @@ function Navbar() {
     
      <div className="b1">
        <button>
-      <li>login</li>
+      <Link to={'/login'}><li>login</li></Link>
       </button>
      </div>
       <div className="b2">
           <button className='register'>
-    <li>register</li>
+      <Link to={'/singup'}><li>register</li></Link>
       </button>
       </div>
      <div className="hamburger" onClick={handleNav}>
-      { !nav ?(<i class="fa-sharp fa-solid fa-bars menus"></i>): <i class="fa-sharp fa-solid fa-xmark minus"></i>}
+      { !nav ?(<i className="fa-sharp fa-solid fa-bars menus"></i>): <i class="fa-sharp fa-solid fa-xmark minus"></i>}
      </div>
      </div>
      
      {/* ================ button ================== */}
       </div>
-       
       </div>
     </div>
   )

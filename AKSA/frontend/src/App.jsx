@@ -1,22 +1,21 @@
 
 import React from 'react'
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
-import Login from './pages/Singup';
 import Home from './pages/home/Home';
-import SiginUp from './pages/Login';
 import Navbar from './pages/navbars/Navbar';
+import Singup from './pages/forms/singup/Singup';
+import Login from './pages/forms/login/Login';
 
 function App() {
   return (
     <div>
       <Router>
-      <Navbar />
+        <Navbar />
         <Routes>
           <Route path="/" element={<Home />}></Route>
-          {/* <Route path="/login" element={<Login />}></Route>
-          <Route path="/singup" element={<SiginUp />}></Route> */}
+          <Route path="/singup" element={<Singup />}></Route>
+          <Route path="/login" element={<Login />}></Route>
         </Routes>
-        
       </Router>
     </div>
   ); 

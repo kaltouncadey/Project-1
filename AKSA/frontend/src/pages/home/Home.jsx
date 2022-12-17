@@ -37,7 +37,7 @@ const Home = () => {
       
             <div className={style.cir}></div>
             <div className={style.back}></div>
-            <img src="./public/2.png" alt="" />
+            <img src="./public/1.png" alt="" />
           </div>
         </div>
           <div className={style.all}>
