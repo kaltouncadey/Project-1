@@ -35,7 +35,7 @@ model users{
 // teacher
 model certificate {
   teachid Int @id @default(autoincrement()) 
-  teacher_subject String
+  teacher_subject  String
   teacheradress String 
   teacherLevel String
   teacherImage String
@@ -65,6 +65,11 @@ iseccapt Boolean @default(false)
 user users @relation(fields: [userID], references: [userId])
 certificate certificate @relation(fields: [teacherId], references: [teachid])
 }
+
+
+
+
+
 
 
 

@@ -2,9 +2,9 @@ const express = require("express");
 const router = express.Router();
 
 const messageRouter = require("../Controls_User/messages");
+const { protect } = require("../middleware/Auth");
 
-
-router.get("/:userID", messageRouter.getoneteach);
+router.get("/post", protect,messageRouter.registers);
 
 
 

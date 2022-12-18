@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import { Link } from "react-router-dom";
+import React, {useState, useEffect} from "react";
+import { Link, useNavigate } from "react-router-dom";
 import style from "./Login.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {login} from '../../../redux/slices/Slice'
@@ -12,6 +12,19 @@ const Login = () => {
 
   const [userEmail, setuserEmail] = useState('');
   const [Userpassword, setUserpassword] = useState('');
+   
+  const navigate = useNavigate();
+
+  const {user} = useSelector((state)=> state.auth);
+
+  useEffect(()=>{
+    if(user?.token){
+      navigate('/')
+    } 
+  },
+  [user]);
+
+
 
   const dispatch = useDispatch();
   
@@ -39,7 +52,7 @@ const Login = () => {
         <div className={style.contact}>
           <div className={style.back}></div>
           <div className={style.cir}></div>
-
+          <p>{loginError ? loginErrorms : ""}</p>
           <div className={style.all}>
             <div className={style.forms}>
               <form onSubmit={loginhandler}>
@@ -47,8 +60,8 @@ const Login = () => {
                 <div className={style.line}></div>
                 <div className={style.group}>
                   <div className={style.inputType}>
-                    <p>{loginError ? loginErrorms : ""}</p>
                     <label htmlFor="">Email</label>
+
                     <input
                       type="text"
                       placeholder="Enter Your Email"
@@ -70,14 +83,21 @@ const Login = () => {
                 </div>
                 <div className={style.buton}>
                   <button>
-                  <i>
-                    {loginloading ? ( <ThreeDots height="40"width="40"radius="9"color="white"/> ) : ("Login")}
-                    </i>  
+                    <i>
+                      {loginloading ? (
+                        <ThreeDots
+                          height="40"
+                          width="40"
+                          radius="9"
+                          color="white"
+                        />
+                      ) : (
+                        "Login"
+                      )}
+                    </i>
                   </button>
                   <div className={style.lin}>
-                
                     <Link to={"/singup"}>I Need Account</Link>
-                   
                   </div>
                 </div>
               </form>

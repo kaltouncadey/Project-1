@@ -1,11 +1,21 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import style from"./Stylehome.module.css";
 import {Link} from 'react-router-dom'
 import { Typewriter } from "react-simple-typewriter";
-
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const Home = () => {
+  const { user } = useSelector((state) => state.auth);
+  
+  const navigate = useNavigate()
+  
+  // useEffect(()=>{
+  //   if(!user?.token){
+  //     navigate('/login')
+  //   }
+  // },[user])
   return (
     <div>
       <div className={style.container1}>

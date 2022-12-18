@@ -1,10 +1,29 @@
 import React, {useState} from 'react'
 import { Link } from "react-router-dom";
 import "./StyleNav.css";
+import { useDispatch , useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import {logout} from '../../redux/slices/Slice'
 
 
+const Navbar = () => {
+  const { user } = useSelector((state)=> state.auth);
 
-function Navbar() {
+  const [showbtn, setshowbtn] = useState(false)
+
+  const dispatch = useDispatch()
+
+   const logoutHandler = () => {
+    dispatch(logout());
+  };
+  useEffect(()=>{
+    if(user?.token){
+      setshowbtn(false)
+      return
+    }
+    setshowbtn(true)
+  },[user])
+
   const [nav, setnav] = useState(false)
   const handleNav = () =>setnav(!nav)
   return (
@@ -22,11 +41,13 @@ function Navbar() {
    </ul>
      
      {/* ================ button ================== */}
-     <div className="btn">
+   {showbtn ? (
+    <>
+      <div className="btn">
     
      <div className="b1">
        <button>
-      <Link to={'/login'}><li>login</li></Link>
+      <Link to={'/login'}><li>Login</li></Link>
       </button>
      </div>
       <div className="b2">
@@ -38,6 +59,16 @@ function Navbar() {
       { !nav ?(<i className="fa-sharp fa-solid fa-bars menus"></i>): <i class="fa-sharp fa-solid fa-xmark minus"></i>}
      </div>
      </div>
+    </>
+     ):
+     <>
+     <div className="buttn">
+     
+      <li onClick={logoutHandler}>Logout</li>
+   
+      <li onClick={logoutHandler}>dashboard</li>
+     </div>
+   </>}
      
      {/* ================ button ================== */}
       </div>

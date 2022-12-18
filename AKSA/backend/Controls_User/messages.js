@@ -1,37 +1,25 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
-const getoneteach = async (req, res) => {
+const registers = async (req, res) => {
   try {
-    const { userID } = req.params;
-
-    const user = await prisma.messages.findByIdAndUpdate({
-      where: {
-        userId: +userID,
-      },
-
-      include: {
-        user: true,
+    const newteacher = await prisma.messages.create({
+      data: {
+        UserID: req.user.user,
       },
     });
-    if (!user) {
-      res.json({
-        status: "Error",
-        message: "The user you are looking for is not in the database",
-      });
-    } else {
-      res.json({
-        status: "success",
-        user,
-      });
-    }
+    res.status(201).json({
+      status: "Succuess",
+      newteacher,
+    });
   } catch (error) {
     res.json({
-      error,
+      status: "Error",
+      message: "not Found",
     });
   }
 };
 
 module.exports ={
-    getoneteach,
+    registers,
 }

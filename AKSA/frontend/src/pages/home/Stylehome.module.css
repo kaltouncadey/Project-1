@@ -35,10 +35,11 @@ button:hover{
  margin-top: 6rem;
 }
 .images img{
-    width: 500px;
-    height: 400px;
+    width: 400px;
+    height: 300px;
     animation: kac 10s infinite;
-    margin-top: 1rem;
+    margin: 4rem;
+
 }
 .cir{
     position: absolute;
