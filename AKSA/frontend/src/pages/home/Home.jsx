@@ -10,12 +10,8 @@ const Home = () => {
   const { user } = useSelector((state) => state.auth);
   
   const navigate = useNavigate()
-  
-  // useEffect(()=>{
-  //   if(!user?.token){
-  //     navigate('/login')
-  //   }
-  // },[user])
+
+ 
   return (
     <div>
       <div className={style.container1}>

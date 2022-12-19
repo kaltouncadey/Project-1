@@ -25,9 +25,9 @@ const protect = (req,res,next)=>{
      }   
      return data;
     });
-    console.log(decoded)
+ 
     req.user = decoded;
-    console.log(req.user.user)
+
     next();
 
 }

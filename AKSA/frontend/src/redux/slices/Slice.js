@@ -6,10 +6,10 @@ const initialState = {
   user: localStorage.getItem("userData")
     ? JSON.parse(localStorage.getItem("userData"))
     : {},
-  loginloading: false,
-  loginSuccess: false,
-  loginError: false,
-  loginErrorms: "",
+  isloading: false,
+  isSuccess: false,
+  iserror: false,
+  errmesg: "",
 };
 
 // api ===> Login
@@ -37,8 +37,41 @@ export const login = createAsyncThunk(
   }
 );
 
-// ============== === SLICE === =================
+// ============ === LOGIN END === =================
+//=================================================
+//=================================================
+//=================================================
+// ============ === Register Start === ========
 
+
+export const register = createAsyncThunk('users/register', async(datas, {rejectWithValue})=>{
+  try {
+    const { data } = await axios.post("http://localhost:5000/api/users/post", {
+      userFname: datas.userFname,
+      userLname: datas.userLname,
+      userPhone: datas.userPhone,
+      userLocation: datas.userLocation,
+      userEmail: datas.userEmail,
+      userpassword: datas.userpassword,
+      useraddress: datas.useraddress,
+    });
+
+    localStorage.setItem('userData', JSON.stringify(data)) 
+
+  } catch (error) {
+    console.log(error)
+    return rejectWithValue(error)
+  }
+})
+
+
+
+// ============ === Register end === ========
+
+
+
+
+// ============== === SLICE === =================
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -49,27 +82,48 @@ const authSlice = createSlice({
     },
   },
 
+
   extraReducers: (builder) => {
     builder
+      // LoGIN extraReducers
       .addCase(login.pending, (state, action) => {
-        state.loginloading = true;
-        state.loginError = false;
-        state.loginSuccess = true;
+        state.isloading = true;
+        state.iserror = false;
+        state.isSuccess = true;
         state.user = {};
       })
       .addCase(login.fulfilled, (state, action) => {
-        state.loginloading = false;
-        state.loginError = false;
-        state.loginSuccess = true;
+        state.isloading = false;
+        state.iserror = false;
+        state.isSuccess = true;
         state.user = action.payload;
       })
 
       .addCase(login.rejected, (state, action) => {
-        state.loginloading = false;
-        state.loginError = true;
-        state.loginSuccess = false;
+        state.isloading = false;
+        state.iserror = true;
+        state.isSuccess = false;
         state.user = {};
-        state.loginErrorms = "something went wrong";
+        state.errmesg = "something went wrong";
+      })
+      // REGISTER extraReducers
+      .addCase(register.pending, (state, action) => {
+        (state.isloading = true), 
+        (state.isSuccess = false);
+      })
+      .addCase(register.fulfilled, (state, action) => {
+        (state.isloading = false),
+          (state.isSuccess = true),
+          (state.errmesg = ""),
+          (state.iserror = false),
+          (state.user = action.payload);
+      })
+      .addCase(register.rejected, (state, action) => {
+        state.isloading = false;
+        state.iserror = true;
+        state.isSuccess = false;
+        state.user = {};
+        state.errmesg = "something went wrong";
       });
   },
 });

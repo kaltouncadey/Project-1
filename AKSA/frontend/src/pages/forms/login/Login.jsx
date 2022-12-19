@@ -85,15 +85,7 @@ const Login = () => {
                   <button>
                     <i>
                       {loginloading ? (
-                        <ThreeDots
-                          height="40"
-                          width="40"
-                          radius="9"
-                          color="white"
-                        />
-                      ) : (
-                        "Login"
-                      )}
+                          <ThreeDots height="40" width="40" radius="9" color="white"/>  ) : ("Login" )}
                     </i>
                   </button>
                   <div className={style.lin}>
